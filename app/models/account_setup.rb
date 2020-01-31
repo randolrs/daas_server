@@ -1,0 +1,2 @@
+class AccountSetup < ApplicationRecord
+end
