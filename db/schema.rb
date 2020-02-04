@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_170932) do
+ActiveRecord::Schema.define(version: 2020_02_04_161416) do
 
   create_table "account_setups", force: :cascade do |t|
     t.boolean "has_account_login"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "event_occurrences", force: :cascade do |t|
+    t.datetime "event_date"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -24,6 +32,8 @@ ActiveRecord::Schema.define(version: 2020_02_02_170932) do
     t.string "website"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "initialDate"
+    t.string "recurrence"
   end
 
   create_table "users", force: :cascade do |t|

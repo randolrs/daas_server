@@ -17,6 +17,6 @@ class API::V1::EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:attributes).permit(:name, :description, :date, :time, :website)
+    params.require(:attributes).permit(:name, :description, :date, :time, :website, :initialDate, :recurrence)
   end
 end
