@@ -1,16 +1,6 @@
 class Event < ApplicationRecord
   has_many :event_occurrences
-  before_create :initiate_event_occurences
-
-  DAYS_OF_THE_WEEK = {
-    "Sunday": :sunday,
-    "Monday": :monday,
-    "Tuesday": :tuesday,
-    "Wednesday": :wednesday,
-    "Thursday": :thursday,
-    "Friday": :friday,
-    "Saturday": :saturday,
-  }.freeze
+  after_create :initiate_event_occurences
 
   def schedule(start)
     schedule = IceCube::Schedule.new(start)
@@ -35,23 +25,17 @@ class Event < ApplicationRecord
     schedule
   end
 
-  def initiate_event_occurences
-    puts '***888 8 8 8 ' * 100
-    puts schedule(Time.now)
-    puts schedule(Time.now).first(10)
-
-    schedule(Time.now).first(10).each do |occurrence|
-      puts ' 6dd66d 0 0 0' * 10
-      puts occurrence
-      puts self.inspect
-      puts description
-      puts ' -- --- - - ' * 10
-      EventOccurrence.create(
+  def create_next_occurrences(count)
+    schedule(Time.now).next_occurrences(count).each do |occurrence|
+      EventOccurrence.create!(
         event_date: occurrence,
-        # :event => self,
+        event: self,
         description: description
       )
     end
+  end
 
+  def initiate_event_occurences
+    create_next_occurrences(10)
   end
 end
