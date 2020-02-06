@@ -38,4 +38,8 @@ class Event < ApplicationRecord
   def initiate_event_occurences
     create_next_occurrences(10)
   end
+
+  def model_name
+    'event_occurrences'
+  end
 end
