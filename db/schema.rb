@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_161416) do
+ActiveRecord::Schema.define(version: 2020_02_14_022045) do
 
   create_table "account_setups", force: :cascade do |t|
     t.boolean "has_account_login"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 2020_02_04_161416) do
     t.integer "event_id"
   end
 
+  create_table "event_tags", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -34,6 +41,13 @@ ActiveRecord::Schema.define(version: 2020_02_04_161416) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "initialDate"
     t.string "recurrence"
+  end
+
+  create_table "events_event_tags", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "event_tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

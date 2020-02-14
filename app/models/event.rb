@@ -1,5 +1,8 @@
 class Event < ApplicationRecord
   has_many :event_occurrences
+  has_many :events_event_tags
+  has_many :event_tags, :through => :events_event_tags
+
   after_create :initiate_event_occurences
 
   def schedule(start)
